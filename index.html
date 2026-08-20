@@ -105,6 +105,18 @@
     0%,92%,100%{transform:scaleY(1);}
     95%{transform:scaleY(.1);}
   }
+    .mascot-mini{
+    position:absolute;
+    width:70px;height:70px;object-fit:contain;
+    filter:drop-shadow(0 6px 8px rgba(30,80,120,.22));
+    animation:bob 3.6s ease-in-out infinite;
+    z-index:3;
+  }
+  .mascot-mini.placeholder{
+    border:2px dashed var(--sky-deep);
+    border-radius:16px;
+    background:rgba(255,255,255,.5);
+  }
   /* botones */
   .btn{
     font-family:'Baloo 2',sans-serif;
@@ -318,6 +330,7 @@
     <section class="slide">
       <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Regalos para ti</h1>
       <p class="subtitle">animate a tocar uno💗</p>
+      <img class="mascot-mini" style="top:8%;right:6%;" src="cina4.jpg" alt="" onerror="this.classList.add('placeholder')">
       <div class="gifts-row">
         <!-- EDITA: cambia el emoji y el texto de gift-reveal por tu regalo real -->
         <div class="gift-box" onclick="openGift(this,0)">🎁</div>
@@ -333,6 +346,7 @@
         <!-- SLIDE 4 — CANCIÓN -->
     <section class="slide">
       <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Te dedico esta canción</h1>
+      <img class="mascot-mini" style="top:6%;left:6%;" src="cina3.png" alt="" onerror="this.classList.add('placeholder')">
       <div class="song-card">
         <div class="song-video" onclick="this.querySelector('video').play(); this.querySelector('.play-btn').style.display='none';">
           <!-- EDITA: pon el nombre de tu archivo de video -->
@@ -353,6 +367,7 @@
     <section class="slide">
       <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">No importa el look, el lugar ni el momento. En cada una de tus versiones siempre encuentro a la mujer hermosa de la que me enamoré.</h1>
       <div class="polaroid-wrap">
+        <img class="mascot-mini" style="bottom:-6%;left:50%;transform:translateX(-50%);" src="cina2.png" alt="" onerror="this.classList.add('placeholder')">
         <!-- EDITA: reemplaza cada src="" por la ruta de tu foto -->
         <div class="polaroid big" style="top:10%;left:50%;transform:translateX(-50%) rotate(-2deg);">
           <img src="primera.jpg" alt="foto 1">
@@ -375,13 +390,14 @@
 
     <!-- SLIDE 6 — CARTA FINAL -->
     <section class="slide">
-      <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Te amo mi amor</h1>
+      <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Te amo mi cachetona💗</h1>
+      <img class="mascot-mini" style="top:4%;right:10%;" src="cina1.png" alt="" onerror="this.classList.add('placeholder')">
       <div class="final-wrap">
         <!-- EDITA: reemplaza src="" por tu foto favorita juntos -->
         <img class="final-photo" src="ojitos.jpg" alt="lo que mas amo de ti!">
         <div class="final-msg">
           <!-- EDITA esta carta con tus propias palabras -->
-          No sé en qué momento te convertiste en alguien tan importante para mí, pero hoy solo quiero que sepas cuánto te amo. Me encanta compartir mis días contigo, crear recuerdos y elegirte una y otra vez. Te amo más de lo que muchas veces sé expresar con palabras.
+         No sé en qué momento te convertiste en mi lugar seguro, aunque estés tan lejos de mí, caramelo. Hay días en que solo cerrar los ojos y recordar los tuyos me alcanza para sentirte cerca. Extraño verlos en persona, esa forma en la que se iluminan cuando te ríes, pero mientras llega el día de tenerte a mi lado, me quedo con cada foto, cada nota de voz, cada "buenos días" que cruza la distancia. Te amo más de lo que la distancia puede medir, caramelo, y sigo eligiéndote todos los días, aunque sea desde lejos.
         </div>
       </div>
       <button class="btn" style="margin-top:22px;" onclick="goTo(0)">Volver a empezar 💙</button>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti 💙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Caveat:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-light:#d8f2fb;
+    --sky-mid:#a7ddf3;
+    --sky-deep:#5cb8e6;
+    --navy:#1c4f74;
+    --white:#ffffff;
+    --pink:#ffd6e6;
+    --pink-deep:#ff9dc0;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;padding:0;height:100%;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(180deg,var(--sky-light) 0%,var(--sky-mid) 55%,var(--sky-deep) 100%);
+    overflow:hidden;
+    color:var(--navy);
+  }
+  #app{
+    position:relative;
+    width:100%;height:100vh;
+    overflow:hidden;
+  }
+  /* nubes flotando de fondo */
+  .cloud{
+    position:absolute;
+    background:#fff;
+    border-radius:50%;
+    opacity:.55;
+    filter:blur(0px);
+    animation:drift linear infinite;
+  }
+  @keyframes drift{
+    from{transform:translateX(-10vw);}
+    to{transform:translateX(110vw);}
+  }
+  .track{
+    display:flex;
+    height:100%;
+    width:600%;
+    transition:transform .65s cubic-bezier(.65,0,.35,1);
+  }
+  .slide{
+    width:16.6666%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    padding:40px 24px;
+    text-align:center;
+  }
+  h1.title{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:clamp(28px,6vw,54px);
+    color:var(--navy);
+    -webkit-text-stroke:1.5px var(--navy);
+    text-shadow:0 3px 0 rgba(255,255,255,.6);
+    margin:0 0 6px 0;
+    letter-spacing:.5px;
+  }
+  .subtitle{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:500;
+    font-size:clamp(14px,2.4vw,20px);
+    color:var(--sky-deep);
+    margin-bottom:18px;
+  }
+  .handwritten{
+    font-family:'Caveat',cursive;
+    font-size:clamp(18px,2.6vw,26px);
+    line-height:1.5;
+    color:#2a5c81;
+  }
+  /* ---- mascota original (nubecita orejona) ---- */
+  .mascot{
+    width:130px;height:130px;object-fit:contain;
+    filter:drop-shadow(0 8px 10px rgba(30,80,120,.25));
+    animation:bob 3.2s ease-in-out infinite;
+  }
+  .mascot.placeholder{
+    border:3px dashed var(--sky-deep);
+    border-radius:24px;
+    background:rgba(255,255,255,.5);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Baloo 2',sans-serif;font-size:13px;color:var(--sky-deep);
+    text-align:center;padding:8px;
+  }
+  @keyframes bob{
+    0%,100%{transform:translateY(0) rotate(-2deg);}
+    50%{transform:translateY(-14px) rotate(2deg);}
+  }
+  .eye{animation:blink 4.5s infinite;}
+  @keyframes blink{
+    0%,92%,100%{transform:scaleY(1);}
+    95%{transform:scaleY(.1);}
+  }
+  /* botones */
+  .btn{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:var(--white);
+    background:linear-gradient(180deg,var(--pink-deep),#ff7fae);
+    border:none;
+    padding:14px 34px;
+    border-radius:40px;
+    cursor:pointer;
+    box-shadow:0 6px 0 #d9628f, 0 10px 18px rgba(0,0,0,.15);
+    transition:transform .15s;
+  }
+  .btn:active{transform:translateY(4px);box-shadow:0 2px 0 #d9628f;}
+  .next-arrow{
+    position:absolute;
+    top:26px;right:26px;
+    width:52px;height:52px;
+    border-radius:50%;
+    background:rgba(255,255,255,.85);
+    border:2px solid var(--sky-deep);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(0,0,0,.12);
+    z-index:20;
+    transition:transform .15s;
+  }
+  .next-arrow:hover{transform:scale(1.08);}
+  .next-arrow svg{width:22px;height:22px;}
+  .dots{
+    position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+    display:flex;gap:9px;z-index:20;
+  }
+  .dot{width:9px;height:9px;border-radius:50%;background:rgba(28,79,116,.25);transition:.3s;}
+  .dot.active{background:var(--navy);width:22px;border-radius:6px;}
+
+  /* --- slide 1: portada --- */
+  .heart-float{position:absolute;font-size:22px;opacity:.7;animation:heartUp 5s linear infinite;}
+  @keyframes heartUp{
+    from{transform:translateY(0) rotate(0deg);opacity:.8;}
+    to{transform:translateY(-90vh) rotate(20deg);opacity:0;}
+  }
+
+  /* --- slide 2: burbujas --- */
+  .bubbles-wrap{position:relative;width:100%;max-width:520px;height:340px;}
+  .bubble{
+    position:absolute;
+    background:rgba(255,255,255,.85);
+    border:2px solid var(--sky-deep);
+    border-radius:30px;
+    padding:10px 18px;
+    font-family:'Caveat',cursive;
+    font-size:20px;
+    color:var(--navy);
+    white-space:nowrap;
+    animation:floaty 3.6s ease-in-out infinite;
+  }
+  @keyframes floaty{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-9px);}
+  }
+
+  /* --- slide 3: regalitos --- */
+  .gifts-row{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;max-width:480px;margin-top:10px;}
+  .gift-box{
+    width:110px;height:110px;
+    background:linear-gradient(160deg,var(--sky-mid),var(--sky-deep));
+    border-radius:22px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:40px;
+    cursor:pointer;
+    box-shadow:0 6px 14px rgba(30,90,130,.3), inset 0 0 0 3px rgba(255,255,255,.5);
+    transition:transform .25s;
+    position:relative;
+  }
+  .gift-box:hover{transform:translateY(-6px) scale(1.04);}
+  .gift-box.opened{background:linear-gradient(160deg,#fff,var(--sky-light));}
+  .gift-reveal{
+    display:none;
+    margin-top:18px;
+    max-width:420px;
+    background:rgba(255,255,255,.9);
+    border:2px solid var(--sky-deep);
+    border-radius:18px;
+    padding:16px 20px;
+    font-family:'Caveat',cursive;
+    font-size:21px;
+  }
+  .gift-reveal.show{display:block;}
+
+  /* --- slide 4: cancion --- */
+  .song-card{
+    display:flex;gap:20px;flex-wrap:wrap;justify-content:center;
+    max-width:640px;margin-top:10px;
+  }
+  .song-video{
+    width:280px;max-width:80vw;aspect-ratio:16/9;
+    border-radius:14px;overflow:hidden;
+    border:3px solid var(--white);
+    box-shadow:0 8px 18px rgba(0,0,0,.18);
+  }
+  .song-video iframe{width:100%;height:100%;border:0;}
+  .song-msg{
+    max-width:260px;
+    background:rgba(255,255,255,.75);
+    border-radius:14px;
+    padding:14px 18px;
+    font-family:'Caveat',cursive;
+    font-size:19px;
+    line-height:1.4;
+    border:2px solid var(--sky-deep);
+  }
+  .song-name{font-family:'Caveat',cursive;font-weight:700;font-size:26px;margin-top:14px;}
+
+  /* --- slide 5: fotos --- */
+  .polaroid-wrap{position:relative;width:100%;max-width:600px;height:340px;}
+  .polaroid{
+    position:absolute;
+    background:#fff;
+    padding:8px 8px 22px 8px;
+    box-shadow:0 8px 16px rgba(0,0,0,.22);
+    border-radius:3px;
+  }
+  .polaroid img{
+    display:block;object-fit:cover;
+    background:linear-gradient(135deg,var(--sky-light),var(--sky-mid));
+  }
+  .polaroid.big{width:190px;height:230px;z-index:5;}
+  .polaroid.big img{width:174px;height:174px;}
+  .polaroid.small{width:130px;height:160px;}
+  .polaroid.small img{width:114px;height:114px;}
+
+  /* --- slide 6: carta final --- */
+  .final-wrap{display:flex;gap:26px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:640px;}
+  .final-photo{
+    width:220px;height:280px;
+    border:8px solid #fff;
+    border-radius:6px;
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+    object-fit:cover;
+    background:linear-gradient(135deg,var(--sky-light),var(--sky-mid));
+  }
+  .final-msg{
+    max-width:300px;text-align:left;
+    font-family:'Caveat',cursive;
+    font-size:20px;line-height:1.5;
+  }
+
+  .ph-label{
+    position:absolute;bottom:4px;left:0;right:0;
+    text-align:center;font-size:10px;color:#9db8c9;font-family:'Poppins';
+  }
+
+  @media (max-width:640px){
+    .polaroid-wrap{height:300px;}
+    .polaroid.big{width:150px;height:190px;}
+    .polaroid.big img{width:134px;height:134px;}
+    .polaroid.small{width:100px;height:126px;}
+    .polaroid.small img{width:84px;height:84px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="track" id="track">
+
+    <!-- SLIDE 1 — PORTADA -->
+    <section class="slide">
+      <div class="heart-float" style="left:12%;animation-delay:0s;">💙</div>
+      <div class="heart-float" style="left:78%;animation-delay:1.4s;">🩵</div>
+      <div class="heart-float" style="left:45%;animation-delay:2.6s;">💙</div>
+      <!-- EDITA: pon aquí tu imagen/sticker de Cinnamoroll (PNG con fondo transparente queda mejor) -->
+      <img class="mascot" src="" alt="Cinnamoroll.png" onerror="this.classList.add('placeholder')">
+      <!-- EDITA AQUÍ: nombre de la persona -->
+      <h1 class="title" style="margin-top:14px;">Regalos para mi niña</h1>
+      <p class="subtitle">pero lo hice para ti...</p>
+      <button class="btn" onclick="goTo(1)">Ver regalos 💙</button>
+    </section>
+
+    <!-- SLIDE 2 — BURBUJAS -->
+    <section class="slide">
+      <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Para mi persona favorita</h1>
+      <div class="bubbles-wrap">
+        <!-- EDITA los textos de estas burbujas como quieras -->
+        <div class="bubble" style="top:0;left:6%;animation-delay:0s;">Te amo mi princesa 💗</div>
+        <div class="bubble" style="top:16%;right:2%;animation-delay:.5s;">Eres mi reina 👑</div>
+        <div class="bubble" style="bottom:22%;left:0;animation-delay:1s;">Eres mi mundo entero 🌍</div>
+        <div class="bubble" style="bottom:6%;right:6%;animation-delay:1.5s;">Te mereces todo lo bueno ✨</div>
+        <!-- EDITA: misma imagen de Cinnamoroll que en la portada -->
+        <img class="mascot" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" src="Cinnamoroll.png" alt="Cinnamoroll.png" onerror="this.classList.add('placeholder')">
+      </div>
+      <div class="next-arrow" onclick="goTo(2)">➜</div>
+    </section>
+
+    <!-- SLIDE 3 — REGALITOS -->
+    <section class="slide">
+      <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Regalos para ti</h1>
+      <p class="subtitle">haz click en cada uno</p>
+      <div class="gifts-row">
+        <!-- EDITA: cambia el emoji y el texto de gift-reveal por tu regalo real -->
+        <div class="gift-box" onclick="openGift(this,0)">🎁</div>
+        <div class="gift-box" onclick="openGift(this,1)">🎀</div>
+        <div class="gift-box" onclick="openGift(this,2)">💌</div>
+      </div>
+      <div class="gift-reveal" id="reveal0">Un día completo solo para nosotros dos, sin celular, sin prisa. 💕</div>
+      <div class="gift-reveal" id="reveal1">Una cena en tu lugar favorito, la que tú elijas. 🍽️</div>
+      <div class="gift-reveal" id="reveal2">Una carta escrita a mano con todo lo que no siempre digo en voz alta. 💌</div>
+      <div class="next-arrow" onclick="goTo(3)">➜</div>
+    </section>
+
+    <!-- SLIDE 4 — CANCIÓN -->
+    <section class="slide">
+      <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Te dedico esta canción</h1>
+      <div class="song-card">
+        <div class="song-video">
+          <!-- EDITA: reemplaza VIDEO_ID por el id de tu video de YouTube -->
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="canción dedicada" allowfullscreen></iframe>
+        </div>
+        <div class="song-msg">
+          <!-- EDITA este mensaje -->
+          Te dedico esta cancion nuevamente porque fue lo primero que me recordo a ti💗 y siempre la llevare en el corazoncito.
+        </div>
+      </div>
+      <!-- EDITA: nombre de la canción -->
+      <p class="song-name">Como Si No Importara — Emilia & Duki </p>
+      <div class="next-arrow" onclick="goTo(4)">https://www.youtube.com/watch?v=00uPgn-8Nvg&list=RD00uPgn-8Nvg&start_radio=1</div>
+    </section>
+
+    <!-- SLIDE 5 — FOTOS -->
+    <section class="slide">
+      <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Nuestras fotos favoritas</h1>
+      <div class="polaroid-wrap">
+        <!-- EDITA: reemplaza cada src="" por la ruta de tu foto -->
+        <div class="polaroid big" style="top:10%;left:50%;transform:translateX(-50%) rotate(-2deg);">
+          <img src="" alt="foto 1" style="width:174px;height:174px;">
+        </div>
+        <div class="polaroid small" style="top:2%;left:4%;transform:rotate(-8deg);">
+          <img src="" alt="foto 2">
+        </div>
+        <div class="polaroid small" style="top:14%;right:2%;transform:rotate(9deg);">
+          <img src="" alt="foto 3">
+        </div>
+        <div class="polaroid small" style="bottom:0%;left:12%;transform:rotate(6deg);">
+          <img src="" alt="foto 4">
+        </div>
+        <div class="polaroid small" style="bottom:2%;right:10%;transform:rotate(-7deg);">
+          <img src="" alt="foto 5">
+        </div>
+      </div>
+      <div class="next-arrow" onclick="goTo(5)">➜</div>
+    </section>
+
+    <!-- SLIDE 6 — CARTA FINAL -->
+    <section class="slide">
+      <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Te amo mi amor</h1>
+      <div class="final-wrap">
+        <!-- EDITA: reemplaza src="" por tu foto favorita juntos -->
+        <img class="final-photo" src="" alt="nuestra foto">
+        <div class="final-msg">
+          <!-- EDITA esta carta con tus propias palabras -->
+          No sé en qué momento te convertiste en alguien tan importante para mí, pero hoy solo quiero que sepas cuánto te amo. Me encanta compartir mis días contigo, crear recuerdos y elegirte una y otra vez. Te amo más de lo que muchas veces sé expresar con palabras.
+        </div>
+      </div>
+      <button class="btn" style="margin-top:22px;" onclick="goTo(0)">Volver a empezar 💙</button>
+    </section>
+
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const total = 6;
+  let current = 0;
+  const track = document.getElementById('track');
+  const dotsWrap = document.getElementById('dots');
+  for(let i=0;i<total;i++){
+    const d=document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.onclick=()=>goTo(i);
+    dotsWrap.appendChild(d);
+  }
+  function goTo(i){
+    current = (i+total)%total;
+    track.style.transform = `translateX(-${current*(100/total)}%)`;
+    [...dotsWrap.children].forEach((d,idx)=>d.classList.toggle('active',idx===current));
+  }
+  function openGift(el,idx){
+    el.classList.add('opened');
+    document.getElementById('reveal'+idx).classList.add('show');
+  }
+  // deslizar con flechas del teclado
+  window.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight') goTo(current+1);
+    if(e.key==='ArrowLeft') goTo(current-1);
+  });
+  // nubes de fondo decorativas
+  const app = document.getElementById('app');
+  for(let i=0;i<6;i++){
+    const c=document.createElement('div');
+    c.className='cloud';
+    const size = 60+Math.random()*90;
+    c.style.width=size+'px';
+    c.style.height=(size*0.5)+'px';
+    c.style.top=(Math.random()*80)+'%';
+    c.style.animationDuration=(25+Math.random()*20)+'s';
+    c.style.animationDelay=(-Math.random()*20)+'s';
+    app.appendChild(c);
+  }
+</script>
+</body>
+</html>

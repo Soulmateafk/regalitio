@@ -197,17 +197,28 @@
   .gift-reveal.show{display:block;}
 
   /* --- slide 4: cancion --- */
-  .song-card{
+   .song-card{
     display:flex;gap:20px;flex-wrap:wrap;justify-content:center;
     max-width:640px;margin-top:10px;
   }
   .song-video{
-    width:280px;max-width:80vw;aspect-ratio:16/9;
+    width:380px;max-width:88vw;aspect-ratio:16/9;
     border-radius:14px;overflow:hidden;
     border:3px solid var(--white);
     box-shadow:0 8px 18px rgba(0,0,0,.18);
+    position:relative;
+    cursor:pointer;
   }
-  .song-video iframe{width:100%;height:100%;border:0;}
+  .song-video iframe,.song-video video{width:100%;height:100%;border:0;object-fit:cover;background:#000;}
+  .play-btn{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:60px;height:60px;border-radius:50%;
+    background:rgba(255,255,255,.85);
+    color:var(--sky-deep);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;padding-left:4px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+  }
   .song-msg{
     max-width:260px;
     background:rgba(255,255,255,.75);
@@ -323,10 +334,11 @@
       <div class="song-card">
         <div class="song-video">
           <!-- EDITA: reemplaza VIDEO_ID por el id de tu video de YouTube -->
-         <div class="song-video">
-  <!-- EDITA: pon el nombre de tu archivo de video (mismo lugar que tus fotos) -->
-        <video src="Emilia & Duki – Como Si No Importara (Official Video).mp4" controls playsinline poster=""></video>
-      </div>
+         <div class="song-video" onclick="this.querySelector('video').play(); this.querySelector('.play-btn').style.display='none';">
+  <!-- EDITA: pon el nombre de tu archivo de video -->
+            <video src="Emilia & Duki – Como Si No Importara (Official Video).mp4" playsinline poster="💗"></video>
+            <div class="play-btn">💗</div>
+          </div>
             <!-- EDITA este mensaje -->
           Te dedico esta cancion nuevamente porque fue lo primero que me recordo a ti💗 y siempre la llevare en el corazoncito.
         </div>
@@ -342,19 +354,19 @@
       <div class="polaroid-wrap">
         <!-- EDITA: reemplaza cada src="" por la ruta de tu foto -->
         <div class="polaroid big" style="top:10%;left:50%;transform:translateX(-50%) rotate(-2deg);">
-          <img src="" alt="foto 1" style="width:174px;height:174px;">
+          <img src="primera.jpg" alt="foto 1" style="width:174px;height:174px;">
         </div>
         <div class="polaroid small" style="top:2%;left:4%;transform:rotate(-8deg);">
-          <img src="" alt="foto 2">
+          <img src="segunda.jpg" alt="foto 2">
         </div>
         <div class="polaroid small" style="top:14%;right:2%;transform:rotate(9deg);">
-          <img src="" alt="foto 3">
+          <img src="tercera.jpg " alt="foto 3">
         </div>
         <div class="polaroid small" style="bottom:0%;left:12%;transform:rotate(6deg);">
-          <img src="" alt="foto 4">
+          <img src="cuarta.jpg" alt="foto 4">
         </div>
         <div class="polaroid small" style="bottom:2%;right:10%;transform:rotate(-7deg);">
-          <img src="" alt="foto 5">
+          <img src="quinta.jpg" alt="foto 5">
         </div>
       </div>
       <div class="next-arrow" onclick="goTo(5)">➜</div>
@@ -365,7 +377,7 @@
       <h1 class="title" style="font-size:clamp(22px,4.5vw,36px);">Te amo mi amor</h1>
       <div class="final-wrap">
         <!-- EDITA: reemplaza src="" por tu foto favorita juntos -->
-        <img class="final-photo" src="" alt="nuestra foto">
+        <img class="final-photo" src="" alt="lo que amo de ti.">
         <div class="final-msg">
           <!-- EDITA esta carta con tus propias palabras -->
           No sé en qué momento te convertiste en alguien tan importante para mí, pero hoy solo quiero que sepas cuánto te amo. Me encanta compartir mis días contigo, crear recuerdos y elegirte una y otra vez. Te amo más de lo que muchas veces sé expresar con palabras.
